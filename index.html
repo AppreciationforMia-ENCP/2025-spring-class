@@ -152,21 +152,55 @@ input[type="checkbox"]:checked ~ label .photo-wrapper {
       font-family: 'Quicksand', sans-serif;
     }
 
-    @media (max-width: 960px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+    /* Default desktop view (unchanged unless you need adjustments) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
 
-    @media (max-width: 640px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
+/* MOBILE view: One person per screen */
+@media (max-width: 480px) {
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
 
-      h1 {
-        font-size: 2.2rem;
-      }
-    }
+  .grid {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+  }
+
+  .card {
+    min-height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+    padding: 16px;
+  }
+
+  .envelope {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .letter {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+}
+
   </style>
 </head>
 <body>
