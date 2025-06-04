@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>With Love, To Our Teacher </title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: #fff0f5;
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    }
+  
+    .photo-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  /* Hide photo-wrapper when envelope is open (checkbox checked) */
+input[type="checkbox"]:checked ~ label .photo-wrapper {
+  display: none;
+}
+
+}
+
+.photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #d81b60;
+  display: block;
+  margin: 0 auto;
+}
+
+.photo-name {
+  margin-top: 6px;
+  font-size: 2.0rem;
+  font-weight: bold;
+  color: #880e4f;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+    h1 {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: #c2185b;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 3.5; /* increased height ratio */
+  perspective: 1000px;
+}
+
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .envelope {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #ffe4ec;
+      border: 2px solid #d81b60;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .envelope:hover {
+      transform: scale(1.02);
+    }
+
+    .letter {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffafc;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+  transition: top 1s ease;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  border-top: 3px double #d81b60;
+  overflow-y: auto;
+}
+
+
+    .letter h4 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.4rem;
+      color: #c2185b;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    input:checked ~ label .flap {
+      transform: rotateX(-180deg);
+    }
+
+    input:checked ~ label .letter {
+      top: 0;
+    }
+
+    .name-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #880e4f;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 6px 0;
+      z-index: 1;
+      border-top: 1px dashed #d81b60;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>With Love, To Our Teacher, Mia 💐</h1>
+
+<div class="grid">
+
+  <!-- Envelope 1 -->
+   <style>
+  .photo-wrapper {
+    transition: opacity 0.3s ease;
+  }
+
+  input[type="checkbox"]:checked + label .photo-wrapper {
+    display: none;
+  }
+</style>
+
+  <!-- Envelope 2 -->
+  <div class="card">
+    <input type="checkbox" id="env2">
+    <label for="env2" class="envelope">
+      <div class="photo-wrapper">
+        <img class="photo" src="MHA.jpg" alt="Photo of Myat Hsu Aung">
+        <div class="photo-name">Myat Hsu</div>
+      </div>
+      <div class="flap"></div>
+      <div class="letter">
+        <h4>From Myat Hsu</h4>
+        <p>Hello, Mia!! I am always grateful for your kindness and empathy toward all of us. And you are the one who truly checks in and cares in the class whenever we feel stressed or overwhelmed. Regarding to your lectures, as someone who used to write quite randomly, your guidance has really helped me learn to write in a more organized and structured way, and I appreciate that so much. I hope you are having wonderful days. Thank you again for everything!!</p>
+      </div>
+    </label>
+  </div>
+
+  <!-- Envelope 3 -->
+  <div class="card">
+    <input type="checkbox" id="env3">
+    <label for="env3" class="envelope">
+      <div class="photo-wrapper">
+        <img class="photo" src="Lu.jpg" alt="Photo of Alice">
+        <div class="photo-name">Lu Htoi</div>
+      </div>
+      <div class="flap"></div>
+      <div class="letter">
+        <h4>From Lu Htoi</h4>
+        <p>Professor Mia,
+There’s something I’ve truly been wanting to say. Although I had some bad experiences with teachers when I was younger, meeting you changed my perspective completely. You showed me that a professor is not just someone who teaches lessons but someone who has the power to shape a student into a better person. For that realization, I’m always deeply grateful to God.</p>
+      </div>
+    </label>
+  </div>
+
+  <!-- Envelope 4 -->
+  <div class="card">
+    <input type="checkbox" id="env4">
+    <label for="env4" class="envelope">
+      <div class="photo-wrapper">
+        <img class="photo" src="Chue.jpg" alt="Photo of Alice">
+        <div class="photo-name">Chue Myat Noe</div>
+      </div>
+      <div class="flap"></div>
+      <div class="letter">
+        <h4>From Chue Myat Noe</h4>
+        <p> <br> 
+            <br> Dear Professor Mia, <br>
+
+Thank you for everything for the whole year and everything that you made for us. Hope to meet you again in other classes.</p>
+      </div>
+    </label>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" id="env1">
+    <label for="env1" class="envelope">
+      <div class="photo-wrapper">
+        <img class="photo" src="smile.jpg" alt="Photo of Smile">
+        <div class="photo-name">Smile</div>
+      </div>
+      <div class="flap"></div>
+      <div class="letter">
+        <h4>From Smile</h4>
+        <p>Thank you for being such an inspiring teacher throughout this course. Despite the chaos, you always encouraged me. What I appreciated most was how you took the time to note down each student's nickname and remembered all our names individually and also being kind to everyone in the course. I really loved taking your course which made me think about failing the course and retake it again Hehe 😜🤪 </p>
+      </div>
+    </label>
+  </div>
+
+   <div class="card">
+    <input type="checkbox" id="env5">
+    <label for="env5" class="envelope">
+      <div class="photo-wrapper">
+        <img class="photo" src="Akyi.jpg" alt="Photo of Smile">
+        <div class="photo-name">Kyi Min Thant</div>
+      </div>
+      <div class="flap"></div>
+      <div class="letter">
+        <h4>From Kyi Min Thant</h4>
+        <p> <br> Dear professor,<br>
+
+You are the first professor that gives me a comfort zone. Whenever I have bad connection, you understand me. You always give a second chance to everyone since you understand everyone have their own difficulties. Thank you for always doing the best in teaching. I feel confidence in both discussion and writing. You know well me that I am really extra introverted person who afraid to discuss. I really feel my improvement right now because of you. Thank you so much and I hope we can meet again someday.</p>
+      </div>
+    </label>
+  </div>
+
+  <!-- Envelope 2 -->
+  <div class="card">
+    <input type="checkbox" id="env6">
+    <label for="env6" class="envelope">
+      <div class="photo-wrapper">
+        <img class="photo" src="Aung Kyaw Moe.jpg" alt="Photo of Myat Hsu Aung">
+        <div class="photo-name">Aung Kyaw Moe</div>
+      </div>
+      <div class="flap"></div>
+      <div class="letter">
+        <h4>From Aung Kyaw Moe</h4>
+        <p>Thank you, Mia. From the start of the first semester to the final of the second, you have put in so much effort to teach us and create a great learning environment for each of us. Because of you, I felt comfortable and motivated to voice my opinions in yours and other classes. Thank you for being patient, kind and dedicated in teaching us. If its possible, I would love to pop into the office hours to chat and request tips from you for writings in the future. And please don't be hesitated to reach out to us if you need anything. Wishing you the best. And thank you for being our teacher, Mia.p>
+      </div>
+    </label>
+  </div>
+
+</div>
+
+</body>
+</html>
