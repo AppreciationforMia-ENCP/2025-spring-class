@@ -1,107 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>With Love, To Our Teacher </title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>With Love, To Our Teacher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet"/>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    /* General Reset and Styling */
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      padding: 40px 20px;
-      background: #fff0f5;
-      font-family: 'Quicksand', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-    }
-  
-    .photo-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 3;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  /* Hide photo-wrapper when envelope is open (checkbox checked) */
-input[type="checkbox"]:checked ~ label .photo-wrapper {
+html, body {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: #fff0f5 url('https://www.transparenttextures.com/patterns/cream-paper.png');
+  overflow: hidden;
+}
+
+/* Page Layouts */
+#page1, #page2 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.8s ease;
+}
+
+#page1 {
+  justify-content: center;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: transparent;
+}
+
+#page2 {
   display: none;
+  position: relative;
+  background: #fff0f5;
+  overflow-y: auto;
+  z-index: 1;
+  padding-top: 80px; /* Space for the heading */
 }
 
+/* Canvas Styling (Decorative Background) */
+canvas#myCanvas {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.photo {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #d81b60;
-  display: block;
+/* Main Heading */
+#page2 > h1 {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8rem;
+  color: #c2185b;
+  margin: 0 auto 20px;
+  padding: 0 16px;
+  max-width: 90%;
+}
+
+/* Envelope Grid */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 380px; /* Bigger envelope */
+  aspect-ratio: 3 / 3.8;
+  perspective: 1000px;
+  margin: 12px auto; /* space between cards */
+}
+
+/* Responsive grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.photo-name {
-  margin-top: 6px;
-  font-size: 2.0rem;
-  font-weight: bold;
-  color: #880e4f;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 2px 6px;
-  border-radius: 8px;
-  font-family: 'Quicksand', sans-serif;
-}
-
-    h1 {
-      text-align: center;
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.8rem;
-      color: #c2185b;
-      margin-bottom: 40px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    .card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 3.5; /* increased height ratio */
-  perspective: 1000px;
-}
-
-
-    input[type="checkbox"] {
-      display: none;
-    }
-
-    .envelope {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #ffe4ec;
-      border: 2px solid #d81b60;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .envelope:hover {
-      transform: scale(1.02);
-    }
-
-    .letter {
+/* Letter inside the envelope */
+.letter {
   position: absolute;
   top: 100%;
   left: 0;
@@ -110,94 +109,154 @@ input[type="checkbox"]:checked ~ label .photo-wrapper {
   background: #fffafc;
   padding: 20px;
   box-sizing: border-box;
-  z-index: 1;
   transition: top 1s ease;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  border-top: 3px double #d81b60;
   overflow-y: auto;
+  z-index: 1;
+  font-size: 1rem;
+}
+
+/* Checkbox hidden for flipping */
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Envelope front */
+.envelope {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffe4ec;
+  border: 2px solid #d81b60;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.envelope:hover {
+  transform: scale(1.02);
 }
 
 
-    .letter h4 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.4rem;
-      color: #c2185b;
-      margin-top: 0;
-      margin-bottom: 10px;
-    }
+input:checked + label .letter {
+  top: 0;
+}
 
-    input:checked ~ label .flap {
-      transform: rotateX(-180deg);
-    }
+input:checked + label .flap {
+  transform: rotateX(-180deg); /* optional */
+}
 
-    input:checked ~ label .letter {
-      top: 0;
-    }
+/* Inside letter */
+.letter h4 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.4rem;
+  color: #c2185b;
+  margin: 0 0 10px;
+}
 
-    .name-tag {
-      position: absolute;
-      bottom: 10px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1rem;
-      color: #880e4f;
-      background-color: rgba(255, 255, 255, 0.7);
-      padding: 6px 0;
-      z-index: 1;
-      border-top: 1px dashed #d81b60;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    /* Default desktop view (unchanged unless you need adjustments) */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
+/* Profile inside envelope */
+.photo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
   padding: 16px;
+  box-sizing: border-box;
 }
 
-/* MOBILE view: One person per screen */
-@media (max-width: 480px) {
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-  }
+.photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #d81b60;
+  object-fit: cover;
+}
 
+.photo-name {
+  margin-top: 6px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #880e4f;
+}
+
+/* Enter Button */
+#enterBtn {
+  padding: 20px 30px;
+  border: 8px solid #ffe2e2;
+  border-radius: 35px;
+  background-color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #a14b6c;
+  font-family: monospace;
+  z-index: 2;
+  transition: transform 0.4s;
+}
+
+#enterBtn:hover {
+  transform: scale(1.05);
+}
+
+/* Tulip image */
+.tulip {
+  width: 60px;
+  margin-top: 20px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.tulip.show {
+  opacity: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
   .grid {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    height: 100vh;
-    scroll-snap-type: y mandatory;
+    display: block;
+    padding: 0;
+    margin: 0;
   }
 
   .card {
-    min-height: 100vh;
     width: 100vw;
-    scroll-snap-align: start;
-    box-sizing: border-box;
-    padding: 16px;
+    height: 100vh;
+    max-width: none;
+    aspect-ratio: unset;
+    margin: 0;
+    padding: 0;
   }
 
-  .envelope {
+  .envelope, .letter {
+    width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    border-radius: 0;
+    border: none;
+  }
+
+  .photo-wrapper {
+    justify-content: center;
   }
 
   .letter {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-size: 1rem;
+    padding: 24px;
+  }
+
+  .photo {
+    width: 90px;
+    height: 90px;
+  }
+
+  .photo-name {
+    font-size: 1.2rem;
+  }
+
+  #page2 > h1 {
+    font-size: 7vw;
+    padding: 16px;
   }
 }
 
@@ -205,122 +264,242 @@ input[type="checkbox"]:checked ~ label .photo-wrapper {
 </head>
 <body>
 
-<h1>With Love, To Our Teacher, Mia 💐</h1>
+  <div id="page1">
+   
+    
+    <h3> With Love, To Our Teacher, Mia 💐</h3>
+    <div id="jsi-butterfly-container" class="container"></div>
+    <script src="butterfly_2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<div class="grid">
-
-  <!-- Envelope 1 -->
-   <style>
-  .photo-wrapper {
-    transition: opacity 0.3s ease;
-  }
-
-  input[type="checkbox"]:checked + label .photo-wrapper {
-    display: none;
-  }
-</style>
-
-  <!-- Envelope 2 -->
-  <div class="card">
-    <input type="checkbox" id="env2">
-    <label for="env2" class="envelope">
-      <div class="photo-wrapper">
-        <img class="photo" src="MHA.jpg" alt="Photo of Myat Hsu Aung">
-        <div class="photo-name">Myat Hsu</div>
-      </div>
-      <div class="flap"></div>
-      <div class="letter">
-        <h4>From Myat Hsu</h4>
-        <p>Hello, Mia!! I am always grateful for your kindness and empathy toward all of us. And you are the one who truly checks in and cares in the class whenever we feel stressed or overwhelmed. Regarding to your lectures, as someone who used to write quite randomly, your guidance has really helped me learn to write in a more organized and structured way, and I appreciate that so much. I hope you are having wonderful days. Thank you again for everything!!</p>
-      </div>
-    </label>
+    <button id="enterBtn">Click here to read the letters</button>
+    <img id="tulipImage" src="tulip.png" class="tulip" />
   </div>
 
-  <!-- Envelope 3 -->
-  <div class="card">
-    <input type="checkbox" id="env3">
-    <label for="env3" class="envelope">
-      <div class="photo-wrapper">
-        <img class="photo" src="Lu.jpg" alt="Photo of Alice">
-        <div class="photo-name">Lu Htoi</div>
-      </div>
-      <div class="flap"></div>
-      <div class="letter">
-        <h4>From Lu Htoi</h4>
-        <p>Professor Mia,
-There’s something I’ve truly been wanting to say. Although I had some bad experiences with teachers when I was younger, meeting you changed my perspective completely. You showed me that a professor is not just someone who teaches lessons but someone who has the power to shape a student into a better person. For that realization, I’m always deeply grateful to God.</p>
-      </div>
-    </label>
-  </div>
-
-  <!-- Envelope 4 -->
-  <div class="card">
-    <input type="checkbox" id="env4">
-    <label for="env4" class="envelope">
-      <div class="photo-wrapper">
-        <img class="photo" src="Chue.jpg" alt="Photo of Alice">
-        <div class="photo-name">Chue Myat Noe</div>
-      </div>
-      <div class="flap"></div>
-      <div class="letter">
-        <h4>From Chue Myat Noe</h4>
-        <p> <br> 
-            <br> Dear Professor Mia, <br>
-
-Thank you for everything for the whole year and everything that you made for us. Hope to meet you again in other classes.</p>
-      </div>
-    </label>
-  </div>
-
-  <div class="card">
-    <input type="checkbox" id="env1">
-    <label for="env1" class="envelope">
-      <div class="photo-wrapper">
-        <img class="photo" src="smile.jpg" alt="Photo of Smile">
-        <div class="photo-name">Smile</div>
-      </div>
-      <div class="flap"></div>
-      <div class="letter">
-        <h4>From Smile</h4>
-        <p>Thank you for being such an inspiring teacher throughout this course. Despite the chaos, you always encouraged me. What I appreciated most was how you took the time to note down each student's nickname and remembered all our names individually and also being kind to everyone in the course. I really loved taking your course which made me think about failing the course and retake it again Hehe 😜🤪 </p>
-      </div>
-    </label>
-  </div>
-
-   <div class="card">
-    <input type="checkbox" id="env5">
-    <label for="env5" class="envelope">
-      <div class="photo-wrapper">
-        <img class="photo" src="Akyi.jpg" alt="Photo of Smile">
-        <div class="photo-name">Kyi Min Thant</div>
-      </div>
-      <div class="flap"></div>
-      <div class="letter">
-        <h4>From Kyi Min Thant</h4>
-        <p> <br> Dear professor,<br>
-
-You are the first professor that gives me a comfort zone. Whenever I have bad connection, you understand me. You always give a second chance to everyone since you understand everyone have their own difficulties. Thank you for always doing the best in teaching. I feel confidence in both discussion and writing. You know well me that I am really extra introverted person who afraid to discuss. I really feel my improvement right now because of you. Thank you so much and I hope we can meet again someday.</p>
-      </div>
-    </label>
-  </div>
-
-  <!-- Envelope 2 -->
-  <div class="card">
-    <input type="checkbox" id="env6">
-    <label for="env6" class="envelope">
-      <div class="photo-wrapper">
-        <img class="photo" src="Aung Kyaw Moe.jpg" alt="Photo of Myat Hsu Aung">
-        <div class="photo-name">Aung Kyaw Moe</div>
-      </div>
-      <div class="flap"></div>
-      <div class="letter">
-        <h4>From Aung Kyaw Moe</h4>
-        <p>Thank you, Mia. From the start of the first semester to the final of the second, you have put in so much effort to teach us and create a great learning environment for each of us. Because of you, I felt comfortable and motivated to voice my opinions in yours and other classes. Thank you for being patient, kind and dedicated in teaching us. If its possible, I would love to pop into the office hours to chat and request tips from you for writings in the future. And please don't be hesitated to reach out to us if you need anything. Wishing you the best. And thank you for being our teacher, Mia.p>
-      </div>
-    </label>
-  </div>
-
+  <div id="page2">
+    <canvas id="myCanvas"></canvas>
+  
+    <h1>With Love, To Our Teacher, Mia 💐</h1>
+  
+    <div class="grid">
+      <div class="card">
+  <input type="checkbox" id="env3">
+  <label for="env3" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="Lu.jpg" alt="Photo of Lu Htoi">
+      <div class="photo-name">Lu Htoi</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Lu Htoi</h4>
+      <p>Professor Mia, although I had some bad experiences with teachers when I was younger, meeting you changed my perspective completely. You showed me that a professor is not just someone who teaches lessons but someone who has the power to shape a student into a better person. For that realization, I’m always deeply grateful to God.</p>
+    </div>
+  </label>
 </div>
 
+
+<div class="card">
+  <input type="checkbox" id="env2">
+  <label for="env2" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="MHA.jpg" alt="Photo of Myat Hsu Aung">
+      <div class="photo-name">Myat Hsu</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Myat Hsu</h4>
+      <p>Hello, Mia!! I am always grateful for your kindness and empathy toward all of us. And you are the one who truly checks in and cares in the class whenever we feel stressed or overwhelmed. Your guidance really helped me learn to write in a more organized and structured way, and I appreciate that so much. Thank you again for everything!!</p>
+    </div>
+  </label>
+</div>
+
+<div class="card">
+  <input type="checkbox" id="env1">
+<label for="env1" class="envelope">
+<div class="photo-wrapper">
+<img class="photo" src="smile.jpg" alt="Photo of Smile">
+<div class="photo-name">Smile</div>
+</div>
+<div class="flap"></div>
+<div class="letter">
+<h4>From Smile</h4>
+<p>Thank you for being such an inspiring teacher throughout this course. Despite the chaos, you always encouraged me. What I appreciated most was how you took the time to note down each student's nickname and remembered all our names individually and also being kind to everyone in the course. I really loved taking your course which made me think about failing the course and retake it again Hehe 😜🤪</p>
+</div>
+</label>
+</div>
+
+
+<div class="card">
+  <input type="checkbox" id="env4">
+  <label for="env4" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="Chue.jpg" alt="Photo of Chue Myat Noe">
+      <div class="photo-name">Chue Myat Noe</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Chue Myat Noe</h4>
+      <p>Dear Professor Mia,<br><br>Thank you for everything throughout the year and for all you’ve done for us. I really appreciate your kindness and guidance. Hope to meet you again in other classes!</p>
+    </div>
+  </label>
+</div>
+
+<div class="card">
+  <input type="checkbox" id="env5">
+  <label for="env5" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="Akyi.jpg" alt="Photo of Kyi Min Thant">
+      <div class="photo-name">Kyi Min Thant</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Kyi Min Thant</h4>
+      <p>Dear professor,<br><br>You are the first professor that gives me a comfort zone. You always give a second chance to everyone since you understand we all have different struggles. I feel confident in discussions and writing now. I’m an introvert, but I feel my improvement because of you. Thank you so much. I hope we meet again someday.</p>
+    </div>
+  </label>
+</div>
+
+<div class="card">
+  <input type="checkbox" id="env6">
+  <label for="env6" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="Aung Kyaw Moe.jpg" alt="Photo of Aung Kyaw Moe">
+      <div class="photo-name">Aung Kyaw Moe</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Aung Kyaw Moe</h4>
+      <p>Thank you, Mia. From the start of the first semester to the final of the second, you have worked so hard to support us. You made me feel comfortable and motivated to voice my opinions. I’d love to chat in future office hours and get more writing tips. Wishing you all the best!</p>
+    </div>
+  </label>
+</div>
+
+<div class="card">
+  <input type="checkbox" id="env7">
+  <label for="env7" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="Saung.jpg" alt="Photo of Aung Kyaw Moe">
+      <div class="photo-name"> Saung Hay Hman</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Saung Hay Hman</h4>
+      <p>ENCP 2 was truly a joyful experience. Thank you so much for your patience and kindness. I am so grateful to have had the opportunity to learn from you. Thank you for everything, Professor Mia! I hope we can meet again at graduation next year 💛</p>
+    </div>
+  </label>
+</div>
+
+<div class="card">
+  <input type="checkbox" id="env8">
+  <label for="env8" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="zay yan.jpg" alt="Photo of Aung Kyaw Moe">
+      <div class="photo-name">Zay Yan Myint</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Zay Yan Myint</h4>
+      <p>Mingalarbar Professor Mia, I have never forgotten the first day I met you. It was in the Language and Thinking Program. I was impressed by your freelance teaching and it aligned with my desire learning style. So, when the course registration opened for the first semester (Fall Semester) , I tried to register your course first as I was worried not to get a seat in your class. It was aslo the same to the Spring Semester: I cannot afford to express how much I was lucky. You teached and guided me a lot throughout the one year journey: you have made us ready for the future calsses. Wishing you have a happy summer holiday.  I believe I will have a chance to meet you in person in the future.</p>
+    </div>
+  </label>
+</div>
+
+<div class="card">
+  <input type="checkbox" id="env9">
+  <label for="env9" class="envelope">
+    <div class="photo-wrapper">
+      <img class="photo" src="Theigihtun.jpg" alt="Photo of Nan Ei Ei">
+      <div class="photo-name">Theingi Htun</div>
+    </div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h4>From Theigi Htun</h4>
+      <p>
+        Thank you so much for your support and guidance throughout this year. I truly appreciate everything you've done, and I hope to see you again, Professor.
+      </p>
+    </div>
+  </label>
+</div>
+
+
+
+  </div>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="Novo_Amor_-_From_Gold_CeeNaija.com_.mp3" type="audio/mp3" />
+  </audio>
+
+  <script>
+    function spawnButterflies(count = 10) {
+      for (let i = 0; i < count; i++) {
+        const butterfly = document.createElement("div");
+        butterfly.classList.add("butterfly");
+        butterfly.style.top = Math.random() * 100 + '%';
+        butterfly.style.left = Math.random() * 100 + '%';
+        butterfly.style.animationDelay = Math.random() * 10 + 's';
+        document.getElementById("page1").appendChild(butterfly);
+      }
+    }
+
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    const hearts = [];
+
+    function Heart() {
+      this.x = Math.random() * canvas.width;
+      this.y = canvas.height + Math.random() * 100;
+      this.size = Math.random() * 20 + 10;
+      this.speed = Math.random() * 1 + 0.5;
+      this.opacity = Math.random() * 0.5 + 0.5;
+      this.color = `rgba(255, 105, 180, ${this.opacity})`;
+    }
+    Heart.prototype.update = function () {
+      this.y -= this.speed;
+      if (this.y < -this.size) {
+        this.y = canvas.height + Math.random() * 100;
+        this.x = Math.random() * canvas.width;
+      }
+    };
+    Heart.prototype.draw = function () {
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.bezierCurveTo(this.x - this.size / 2, this.y - this.size / 2, this.x - this.size, this.y + this.size / 3, this.x, this.y + this.size);
+      ctx.bezierCurveTo(this.x + this.size, this.y + this.size / 3, this.x + this.size / 2, this.y - this.size / 2, this.x, this.y);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    };
+    function animateHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach(heart => {
+        heart.update();
+        heart.draw();
+      });
+      requestAnimationFrame(animateHearts);
+    }
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    document.body.addEventListener("click", () => {
+      const audio = document.getElementById("bgMusic");
+      if (audio.paused) audio.play().catch(() => {});
+    }, { once: true });
+
+    document.getElementById("enterBtn").addEventListener("click", () => {
+      document.getElementById("tulipImage").classList.add("show");
+      setTimeout(() => {
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "flex";
+        resizeCanvas();
+        for (let i = 0; i < 100; i++) hearts.push(new Heart());
+        animateHearts();
+      }, 1000);
+    });
+
+    spawnButterflies();
+    window.addEventListener('resize', resizeCanvas);
+  </script>
 </body>
 </html>
